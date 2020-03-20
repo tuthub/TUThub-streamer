@@ -6,7 +6,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
-    padding-top: 60px;
+    /*padding-top: 60px;*/
 }
 .nopadding {
     padding: 0 !important;

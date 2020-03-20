@@ -71,6 +71,7 @@ $totalPages = ceil($totalChannels / $_POST['rowCount']);
     <body class="<?php echo $global['bodyClass']; ?>">
         <?php
         include $global['systemRootPath'] . 'view/include/navbar.php';
+        if ($theme != 'avideo') {
         ?>
 
         <div class="container">
@@ -160,5 +161,8 @@ $totalPages = ceil($totalChannels / $_POST['rowCount']);
                 });
             });
         </script>
+        <?php } else {
+            include $global['systemRootPath'] . 'plugin/Avideo/view/channel/channels.php';
+        } ?>
     </body>
 </html>

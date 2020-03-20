@@ -551,3 +551,27 @@ function playerPlay(currentTime) {
         console.log("playerPlay: Player is Undefined");
     }
 }
+
+$(".user-log").on("click", function() {
+    $(".account-menu").slideToggle();
+});
+
+$(".upload").on("click", function() {
+    $(".upload_div").slideToggle();
+});
+
+$(window).on("scroll", function() {
+    var scroll = $(window).scrollTop();
+    // console.log(scroll)
+    if (scroll > 100) {
+        $(".top_bar").addClass("scroll animated slideInDown");
+    } else if (scroll < 100) {
+        $(".top_bar").removeClass("scroll animated slideInDown")
+    }
+});
+
+var header_height = $(".top_bar").innerHeight();
+
+$(".side_menu").css({
+    "top": header_height
+});

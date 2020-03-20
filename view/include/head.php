@@ -40,6 +40,11 @@ $theme = $config->getTheme();
 <link href="<?php echo $global['webSiteRootURL']; ?>view/js/webui-popover/jquery.webui-popover.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo $global['webSiteRootURL']; ?>view/css/fontawesome-free-5.5.0-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo $global['webSiteRootURL']; ?>view/css/flagstrap/css/flags.css" rel="stylesheet" type="text/css"/>
+<!-- Added for Avideo -->
+<link href="<?php echo $global['webSiteRootURL']; ?>view/css/fontello.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $global['webSiteRootURL']; ?>view/css/responsive.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $global['webSiteRootURL']; ?>view/css/animate.css" rel="stylesheet" type="text/css">
+
 <?php
 $cssFiles = array();
 $cssFiles[] = "view/js/seetalert/sweetalert.css";
@@ -47,6 +52,7 @@ $cssFiles[] = "view/bootstrap/bootstrapSelectPicker/css/bootstrap-select.min.css
 $cssFiles[] = "view/js/bootgrid/jquery.bootgrid.css";
 $cssFiles[] = "view/css/custom/{$theme}.css";
 $cssFiles[] = "view/css/main.css";
+
 //$cssFiles[] = "view/js/bootstrap-toggle/bootstrap-toggle.min.css";
 $cssFiles = array_merge($cssFiles, AVideoPlugin::getCSSFiles());
 $cssURL = combineFiles($cssFiles, "css");

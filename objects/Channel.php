@@ -55,6 +55,25 @@ class Channel{
         }
         return $row;
     }
+
+    static function getTotalVideosViews($user_id) {
+        $sql = "SELECT views_count "
+                . " FROM videos "
+                . " WHERE users_id = ".$user_id;
+        
+        $res = sqlDAL::readSql($sql);
+        $data = sqlDAL::fetchAllAssoc($res);
+        sqlDAL::close($res);
+
+        $count = 0;
+        foreach ($data as $vc) {
+            $count +=  $vc['views_count'];
+        }
+        return $count;
+        
+       
+        
+    }
     
 }
 

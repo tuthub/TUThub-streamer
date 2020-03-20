@@ -40,6 +40,7 @@ AVideoPlugin::getChannel($user_id, $user);
     <body class="<?php echo $global['bodyClass']; ?>">
         <?php
         include $global['systemRootPath'] . 'view/include/navbar.php';
+        if ($theme != 'avideo') {
         ?>
         <div class="container">
             <?php
@@ -47,6 +48,9 @@ AVideoPlugin::getChannel($user_id, $user);
             ?>
         </div>
         <?php
+        } else {
+            include $global['systemRootPath'] . 'plugin/Avideo/view/channel/channelBody.php';
+        }
         include $global['systemRootPath'] . 'view/include/footer.php';
         ?>
     </body>
