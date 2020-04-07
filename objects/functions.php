@@ -450,9 +450,9 @@ function setSiteSendMessage(&$mail) {
     global $global;
     require_once $global['systemRootPath'] . 'objects/configuration.php';
     $config = new Configuration();
-
+    $mail->CharSet = 'UTF-8';
     if ($config->getSmtp()) {
-        _error_log("Sending SMTP Email");
+        _error_log("Sending SMTP Email");$mail->CharSet = 'UTF-8';
         $mail->IsSMTP(); // enable SMTP
         $mail->SMTPAuth = $config->getSmtpAuth(); // authentication enabled
         $mail->SMTPSecure = $config->getSmtpSecure(); // secure transfer enabled REQUIRED for Gmail
@@ -494,6 +494,9 @@ function sendSiteEmail($to, $subject, $message) {
     if (empty($to)) {
         return false;
     }
+    
+    $subject = UTF8encode($subject);
+    $message = UTF8encode($message);
 
     _error_log("sendSiteEmail [" . count($to) . "] {$subject}");
     global $config, $global;
@@ -1446,6 +1449,8 @@ function decideMoveUploadedToVideos($tmp_name, $filename) {
 
 function unzipDirectory($filename, $destination) {
     global $global;
+    // wait a couple of seconds to make sure the file is completed transfer
+    sleep(2);
     ini_set('memory_limit', '-1');
     ini_set('max_execution_time', 7200); // 2 hours
     $cmd = "unzip {$filename} -d {$destination}" . "  2>&1";

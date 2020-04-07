@@ -1,7 +1,6 @@
 <?php
 require_once '../../videos/configuration.php';
 session_write_close();
-header('Content-Type: image/x-png');
 $filename = $global['systemRootPath'] . 'plugin/Live/view/OnAir.jpg';
 
 require_once $global['systemRootPath'] . 'objects/user.php';
@@ -17,8 +16,18 @@ if(!empty($_GET['c'])){
 }
 
 $livet =  LiveTransmition::getFromDbByUserName($_GET['u']);
-if(empty($_GET['format'])){
+if (empty($_GET['format'])) {
     $_GET['format'] = "png";
+    header('Content-Type: image/x-png');
+} else if ($_GET['format'] === 'jpg') {
+    header('Content-Type: image/jpg');
+} else if ($_GET['format'] === 'gif') {
+    header('Content-Type: image/gif');
+} else if ($_GET['format'] === 'webp') {
+    header('Content-Type: image/webp');
+} else {
+    $_GET['format'] = "png";
+    header('Content-Type: image/x-png');
 }
 $lt = new LiveTransmition($livet['id']);
 _error_log("Live:getImage  start");
@@ -39,9 +48,11 @@ if($lt->userCanSeeTransmition()){
         _error_log("Live:getImage  New Image will Expired in ".  date("d/m/Y H:i:s", $_SESSION[$url]['expire'])." NOW is ".  date("d/m/Y H:i:s"));
     }
     if(!empty($_SESSION[$url]['content'])){
+        ob_end_clean();
         echo $_SESSION[$url]['content'];
         _error_log("Live:getImage  Cached Good until ".  date("d/m/Y H:i:s", $_SESSION[$url]['expire'])." NOW is ".  date("d/m/Y H:i:s"));
     }else{
+        ob_end_clean();
         echo file_get_contents($filename);
         _error_log("Live:getImage  Get default image ");
     }
